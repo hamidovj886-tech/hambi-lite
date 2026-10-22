@@ -28,11 +28,45 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Check project files
+      - name: Create Android project structure
         run: |
-          ls -la
-          test -f settings.gradle
-          test -f app/build.gradle
+          mkdir -p app/src/main/java/uz/hambilite/app
+          mkdir -p app/src/main/res/values
+          mkdir -p app/src/main/res/mipmap-mdpi
+
+          cp MainActivity.java app/src/main/java/uz/hambilite/app/
+          cp AndroidManifest.xml app/src/main/
+          cp styles.xml app/src/main/res/values/
+          cp colors.xml app/src/main/res/values/colors.xml
+          cp ic_launcher.png app/src/main/res/mipmap-mdpi/
+          cp ic_launcher_round.png app/src/main/res/mipmap-mdpi/
+
+          mv build.gradle app/build.gradle
+
+          cat > build.gradle <<'EOF'
+          plugins {
+              id 'com.android.application' version '8.7.3' apply false
+          }
+          EOF
+
+          cat > settings.gradle <<'EOF'
+          pluginManagement {
+              repositories {
+                  google()
+                  mavenCentral()
+                  gradlePluginPortal()
+              }
+          }
+          dependencyResolutionManagement {
+              repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+              repositories {
+                  google()
+                  mavenCentral()
+              }
+          }
+          rootProject.name = "HambiLite"
+          include(":app")
+          EOF
 
       - name: Build APK
         run: gradle --no-daemon assembleDebug
