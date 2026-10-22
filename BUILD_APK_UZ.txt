@@ -1,0 +1,10 @@
+Hambi Lite APK yaratish (GitHub Actions)
+
+1. GitHub'da yangi repository yarating.
+2. ZIP ichidagi hambi_lite_android papkasining ICHIDAGI barcha fayllarni repository ildiziga yuklang. .github papkasini ham yuklash kerak.
+3. GitHub repository -> Actions bo'limiga kiring.
+4. "Build Hambi Lite APK" workflow'ini tanlang va "Run workflow" bosing (yoki main/master ga push qiling).
+5. Build tugagach, workflow run sahifasining pastidagi Artifacts ichidan Hambi-Lite-APK ni yuklab oling.
+6. ZIP ichidagi app-debug.apk faylini telefonga yuboring. Bu debug APK sinov uchun imzolangan bo'ladi; ommaviy tarqatish uchun keyin release signing sozlanadi.
+
+Eslatma: bu workflow APK build qilishga urinadi; build muvaffaqiyatini GitHub Actions logida tekshiring. Balans/paketlarning real ma'lumotlari uchun Beeline tomonidan ruxsat etilgan API/integratsiya talab qilinadi.
